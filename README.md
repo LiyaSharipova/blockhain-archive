@@ -1,3 +1,3 @@
-This project is created from a GitLab [Project Template](https://docs.gitlab.com/ce/gitlab-basics/create-project.html)
-
-Additions and changes to the project can be proposed [on the original project](https://gitlab.com/gitlab-org/project-templates/spring)
+# Startup
+1. mvn clean compile spring-boot:run
+2. Go to http://localhost:8090 
