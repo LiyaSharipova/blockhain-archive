@@ -59,7 +59,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public byte[] load(String filename) {
-        return fileRepository.findByFilName(filename).getData();
+        return fileRepository.findByFileName(filename).getData();
     }
 
     @Override

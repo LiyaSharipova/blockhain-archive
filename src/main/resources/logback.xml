@@ -9,7 +9,7 @@
     <logger name="com.github.liyasharipova.blockchain.archive.logger" additivity="false" level="debug">
         <appender-ref ref="stdout"/>
     </logger>
-    <root level="debug">
+    <root level="INFO">
         <appender-ref ref="stdout"/>
     </root>
 </configuration>

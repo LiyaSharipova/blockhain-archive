@@ -10,5 +10,5 @@ import java.nio.file.Path;
  */
 public interface FileRepository extends CrudRepository<FileEntity, Long> {
 
-    FileEntity findByFilName(String filename);
+    FileEntity findByFileName(String filename);
 }
