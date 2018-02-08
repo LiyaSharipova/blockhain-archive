@@ -75,9 +75,4 @@ public class FileServiceImpl implements FileService {
         }
     }
 
-    @Override
-    public void deleteAll() {
-        fileRepository.deleteAll();
-    }
-
 }

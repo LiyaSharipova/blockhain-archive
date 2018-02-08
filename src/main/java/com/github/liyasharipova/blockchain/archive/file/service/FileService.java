@@ -20,9 +20,4 @@ public interface FileService {
 
     Resource loadAsResource(String filename);
 
-    /**
-     * Удаление всех файлов из таблицы
-     */
-    void deleteAll();
-
 }
