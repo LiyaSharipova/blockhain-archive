@@ -17,7 +17,7 @@ public class FileDto {
     public FileDto() {
     }
 
-    public FileDto(String fileName, Resource fileData) {
+    public FileDto(String fileName, Resource fileData)  {
         this.fileName = fileName;
         this.fileData = fileData;
     }
