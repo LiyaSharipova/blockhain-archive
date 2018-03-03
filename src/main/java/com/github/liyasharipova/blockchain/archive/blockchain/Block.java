@@ -10,6 +10,7 @@ public class Block {
 	public String merkleRoot;
 	public ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 	public long timeStamp;
+//	сгенерированное случайно число обеспечивающее сложность хеша
 	public int nonce;
 	
 
@@ -34,7 +35,7 @@ public class Block {
 	//Увеличиваем значение nonce пока нужный хэш не будет найден
 	public void mineBlock(int difficulty) {
 		merkleRoot = StringUtil.getMerkleRoot(transactions);
-		String target = StringUtil.getDificultyString(difficulty); //Create a string with difficulty * "0" 
+		String target = StringUtil.getDificultyString(difficulty); //Create a string with difficulty * "0"
 		while(!hash.substring( 0, difficulty).equals(target)) {
 			nonce ++;
 			hash = calculateHash();

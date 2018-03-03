@@ -75,6 +75,7 @@ public class StringUtil {
     public static String getMerkleRoot(ArrayList<Transaction> transactions) {
         int count = transactions.size();
 
+//      собираем все хеши транзакций в список previousTreeLayer
         ArrayList<String> previousTreeLayer = new ArrayList<String>();
         for (Transaction transaction : transactions) {
             previousTreeLayer.add(transaction.transactionId);
@@ -89,7 +90,7 @@ public class StringUtil {
             count = treeLayer.size();
             previousTreeLayer = treeLayer;
         }
-
+//      если размер списка хешей транзакций  = 1 то возвращаем хеш транзакции
         String merkleRoot = (treeLayer.size() == 1) ? treeLayer.get(0) : "";
         return merkleRoot;
     }
