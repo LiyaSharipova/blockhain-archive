@@ -14,6 +14,7 @@ public class BlockchainApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(BlockchainApplication.class, args);
+        //fixme почини, чтобы это работало
         if (Security.getProvider("JStribog") == null) {
             Security.addProvider(new StribogProvider());
         }

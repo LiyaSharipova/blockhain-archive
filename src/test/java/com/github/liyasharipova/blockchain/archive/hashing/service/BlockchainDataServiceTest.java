@@ -29,6 +29,7 @@ public class BlockchainDataServiceTest {
             Security.addProvider(new StribogProvider());
         }
     }
+
     @Test
     public void testPlaceToBlockchain() {
         byte[] fileData = "test-data".getBytes();
