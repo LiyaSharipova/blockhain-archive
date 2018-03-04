@@ -1,6 +1,7 @@
 package com.github.liyasharipova.blockchain.archive.hashing.service;
 
 import com.github.liyasharipova.blockchain.archive.AppConfig;
+import com.github.liyasharipova.blockchain.archive.hashing.blockchaindata.BlockchainDataService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ public class BlockchainDataServiceTest {
 
     @Test
     public void placeToBlockchain() {
-
         byte[] fileData = "test-data".getBytes();
         String userId = "test-user-id";
         long currentTimeInSec = new Date().getTime();
