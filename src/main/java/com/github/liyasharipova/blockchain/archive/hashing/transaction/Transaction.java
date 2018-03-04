@@ -1,6 +1,6 @@
 package com.github.liyasharipova.blockchain.archive.hashing.transaction;
 
-import com.github.liyasharipova.blockchain.archive.blockchain.StringUtil;
+import com.github.liyasharipova.blockchain.archive.blockchain_old.StringUtil;
 import lombok.Data;
 
 import java.util.Arrays;

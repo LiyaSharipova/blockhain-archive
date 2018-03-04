@@ -1,4 +1,4 @@
-package com.github.liyasharipova.blockchain.archive.file.service;
+package com.github.liyasharipova.blockchain.archive.file_tofix.service;
 
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;

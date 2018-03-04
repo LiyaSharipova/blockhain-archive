@@ -1,4 +1,4 @@
-package com.github.liyasharipova.blockchain.archive.file.entity;
+package com.github.liyasharipova.blockchain.archive.file_tofix.entity;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;

@@ -1,6 +1,6 @@
 package com.github.liyasharipova.blockchain.archive.hashing.blockchain;
 
-import com.github.liyasharipova.blockchain.archive.blockchain.NoobChain;
+import com.github.liyasharipova.blockchain.archive.blockchain_old.NoobChain;
 import com.github.liyasharipova.blockchain.archive.hashing.block.Block;
 import com.github.liyasharipova.blockchain.archive.hashing.exception.ChainValidityException;
 import org.springframework.stereotype.Service;

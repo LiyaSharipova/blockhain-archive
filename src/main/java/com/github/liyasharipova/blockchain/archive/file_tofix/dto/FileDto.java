@@ -1,4 +1,4 @@
-package com.github.liyasharipova.blockchain.archive.file.dto;
+package com.github.liyasharipova.blockchain.archive.file_tofix.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.core.io.Resource;

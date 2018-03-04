@@ -1,4 +1,4 @@
-package com.github.liyasharipova.blockchain.archive.file.exception;
+package com.github.liyasharipova.blockchain.archive.file_tofix.exception;
 
 public class StorageException extends RuntimeException {
 

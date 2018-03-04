@@ -1,9 +1,7 @@
-package com.github.liyasharipova.blockchain.archive.file.repostiory;
+package com.github.liyasharipova.blockchain.archive.file_tofix.repostiory;
 
-import com.github.liyasharipova.blockchain.archive.file.entity.FileEntity;
+import com.github.liyasharipova.blockchain.archive.file_tofix.entity.FileEntity;
 import org.springframework.data.repository.CrudRepository;
-
-import java.nio.file.Path;
 
 /**
  * Репозиторий для файлов

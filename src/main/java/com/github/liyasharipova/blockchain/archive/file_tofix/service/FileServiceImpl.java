@@ -1,9 +1,9 @@
-package com.github.liyasharipova.blockchain.archive.file.service;
+package com.github.liyasharipova.blockchain.archive.file_tofix.service;
 
-import com.github.liyasharipova.blockchain.archive.file.entity.FileEntity;
-import com.github.liyasharipova.blockchain.archive.file.exception.StorageException;
-import com.github.liyasharipova.blockchain.archive.file.exception.StorageFileNotFoundException;
-import com.github.liyasharipova.blockchain.archive.file.repostiory.FileRepository;
+import com.github.liyasharipova.blockchain.archive.file_tofix.entity.FileEntity;
+import com.github.liyasharipova.blockchain.archive.file_tofix.exception.StorageException;
+import com.github.liyasharipova.blockchain.archive.file_tofix.exception.StorageFileNotFoundException;
+import com.github.liyasharipova.blockchain.archive.file_tofix.repostiory.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;

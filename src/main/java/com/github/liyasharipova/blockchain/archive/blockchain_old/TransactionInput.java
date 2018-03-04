@@ -1,4 +1,4 @@
-package com.github.liyasharipova.blockchain.archive.blockchain;
+package com.github.liyasharipova.blockchain.archive.blockchain_old;
 
 public class TransactionInput {
 	public String transactionOutputId; //Reference to TransactionOutputs -> transactionId
