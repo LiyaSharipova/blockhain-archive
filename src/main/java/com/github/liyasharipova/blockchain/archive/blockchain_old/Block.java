@@ -40,7 +40,7 @@ public class Block {
 			nonce ++;
 			hash = calculateHash();
 		}
-		System.out.println("Block Mined!!! : " + hash);
+		System.out.println("BlockDto Mined!!! : " + hash);
 	}
 	
 	//Добавляем транзакцию к блоку
@@ -49,13 +49,13 @@ public class Block {
 		if(transaction == null) return false;
 		if((previousHash != "0")) {
 			if((transaction.processTransaction() != true)) {
-				System.out.println("Transaction failed to process. Discarded.");
+				System.out.println("TransactionDto failed to process. Discarded.");
 				return false;
 			}
 		}
 
 		transactions.add(transaction);
-		System.out.println("Transaction Successfully added to Block");
+		System.out.println("TransactionDto Successfully added to BlockDto");
 		return true;
 	}
 	

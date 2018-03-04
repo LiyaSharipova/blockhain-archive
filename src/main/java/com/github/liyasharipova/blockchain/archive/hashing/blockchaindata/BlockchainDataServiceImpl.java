@@ -1,7 +1,7 @@
-package com.github.liyasharipova.blockchain.archive.hashing.service;
+package com.github.liyasharipova.blockchain.archive.hashing.blockchaindata;
 
 import com.github.liyasharipova.blockchain.archive.hashing.block.BlockService;
-import com.github.liyasharipova.blockchain.archive.hashing.transaction.Transaction;
+import com.github.liyasharipova.blockchain.archive.hashing.transaction.TransactionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class BlockchainDataServiceImpl implements BlockchainDataService {
     @Override
     public void placeToBlockchain(byte[] fileData, String userId, long uploadDateTime) {
 
-        Transaction transaction = new Transaction(fileData, userId, uploadDateTime);
+        TransactionDto transaction = new TransactionDto(fileData, userId, uploadDateTime);
 
         blockService.addTransaction(transaction);
 

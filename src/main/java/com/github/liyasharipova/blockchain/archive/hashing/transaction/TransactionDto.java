@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Arrays;
 
 @Data
-public class Transaction {
+public class TransactionDto {
 
     private String hash; //Contains a hash of transaction*
 
@@ -18,7 +18,7 @@ public class Transaction {
 
     private static int sequence = 0; //A rough count of how many transactions have been generated
 
-    public Transaction(byte[] data, String userId, long uploadDateTime) {
+    public TransactionDto(byte[] data, String userId, long uploadDateTime) {
         this.data = data;
         this.userId = userId;
         this.uploadDateTime = uploadDateTime;

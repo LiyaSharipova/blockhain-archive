@@ -28,7 +28,7 @@ public class Transaction {
 	public boolean processTransaction() {
 		
 		if(verifiySignature() == false) {
-			System.out.println("#Transaction Signature failed to verify");
+			System.out.println("#TransactionDto Signature failed to verify");
 			return false;
 		}
 				
@@ -39,7 +39,7 @@ public class Transaction {
 
 		//Checks if transaction is valid:
 //		if(getInputsValue() < NoobChain.minimumTransaction) {
-//			System.out.println("Transaction Inputs to small: " + getInputsValue());
+//			System.out.println("TransactionDto Inputs to small: " + getInputsValue());
 //			return false;
 //		}
 
@@ -56,7 +56,7 @@ public class Transaction {
 
 		//Remove transaction inputs from UTXO lists as spent:
 //		for(TransactionInput i : inputs) {
-//			if(i.UTXO == null) continue; //if Transaction can't be found skip it
+//			if(i.UTXO == null) continue; //if TransactionDto can't be found skip it
 //			NoobChain.UTXOs.remove(i.UTXO.id);
 //		}
 
@@ -66,7 +66,7 @@ public class Transaction {
 //	public float getInputsValue() {
 //		float total = 0;
 //		for(TransactionInput i : inputs) {
-//			if(i.UTXO == null) continue; //if Transaction can't be found skip it, This behavior may not be optimal.
+//			if(i.UTXO == null) continue; //if TransactionDto can't be found skip it, This behavior may not be optimal.
 //			total += i.UTXO.value;
 //		}
 //		return total;

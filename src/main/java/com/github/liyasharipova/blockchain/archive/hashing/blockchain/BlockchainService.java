@@ -1,6 +1,6 @@
 package com.github.liyasharipova.blockchain.archive.hashing.blockchain;
 
-import com.github.liyasharipova.blockchain.archive.hashing.block.Block;
+import com.github.liyasharipova.blockchain.archive.hashing.block.BlockDto;
 
 import java.util.List;
 
@@ -9,14 +9,14 @@ import java.util.List;
  */
 public interface BlockchainService {
 
-    /** Хэш  предыдущего блока {@link Block#previousHash} для первого блока в блокчейне */
+    /** Хэш  предыдущего блока {@link BlockDto#previousHash} для первого блока в блокчейне */
     String EMPTY_PREVIOUS_HASH = "0";
 
     /** Получить связку блокчейн */
-    List<Block> getBlockChain();
+    List<BlockDto> getBlockChain();
 
     /** Добавить блок в блокчейн */
-    void addBlock(Block block);
+    void addBlock(BlockDto block);
 
     /** Получить хэш последнего блока*/
     String getLastBlockHash();

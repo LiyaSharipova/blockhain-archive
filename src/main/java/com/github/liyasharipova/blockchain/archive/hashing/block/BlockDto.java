@@ -1,14 +1,14 @@
 package com.github.liyasharipova.blockchain.archive.hashing.block;
 
 import com.github.liyasharipova.blockchain.archive.hashing.util.StringUtil;
-import com.github.liyasharipova.blockchain.archive.hashing.transaction.Transaction;
+import com.github.liyasharipova.blockchain.archive.hashing.transaction.TransactionDto;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 @Data
-public class Block {
+public class BlockDto {
 
     /**
      * Хэш блока, вычисляюющий на основе хэша пред. блока, merkleRoot (хэш на основе всех транзакций),
@@ -23,7 +23,7 @@ public class Block {
     private String merkleRoot;
 
     /** Список транзакций в блоке */
-    private ArrayList<Transaction> transactions = new ArrayList<>();
+    private ArrayList<TransactionDto> transactions = new ArrayList<>();
 
     /** Время создания блока */
     private long timeStamp;
@@ -31,7 +31,7 @@ public class Block {
     /** сгенерированное случайно число обеспечивающее сложность хеша */
     private int nonce;
 
-    public Block(String previousHash) {
+    public BlockDto(String previousHash) {
         this.previousHash = previousHash;
         this.timeStamp = new Date().getTime();
 
@@ -61,20 +61,20 @@ public class Block {
             nonce++;
             hash = calculateHash();
         }
-        System.out.println("Block Mined!!! : " + hash);
+        System.out.println("BlockDto Mined!!! : " + hash);
     }
 
     /**
      * Добавляем транзакцию к блоку
      */
-    public boolean addTransaction(Transaction transaction) {
+    public boolean addTransaction(TransactionDto transaction) {
         //если блок не пустой, проверяем валидна ли транзакция
         if (transaction == null) {
             return false;
         }
 
         transactions.add(transaction);
-        System.out.println("Transaction Successfully added to Block");
+        System.out.println("TransactionDto Successfully added to BlockDto");
         return true;
     }
 

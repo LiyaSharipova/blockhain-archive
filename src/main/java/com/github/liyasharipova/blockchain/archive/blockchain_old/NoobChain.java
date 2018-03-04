@@ -100,11 +100,11 @@ public class NoobChain {
 				Transaction currentTransaction = currentBlock.transactions.get(t);
 				
 				if(!currentTransaction.verifiySignature()) {
-					System.out.println("#Signature on Transaction(" + t + ") is Invalid");
+					System.out.println("#Signature on TransactionDto(" + t + ") is Invalid");
 					return false; 
 				}
 //				if(currentTransaction.getInputsValue() != currentTransaction.getOutputsValue()) {
-//					System.out.println("#Inputs are note equal to outputs on Transaction(" + t + ")");
+//					System.out.println("#Inputs are note equal to outputs on TransactionDto(" + t + ")");
 //					return false;
 //				}
 
@@ -112,12 +112,12 @@ public class NoobChain {
 //					tempOutput = tempUTXOs.get(input.transactionOutputId);
 //
 //					if(tempOutput == null) {
-//						System.out.println("#Referenced input on Transaction(" + t + ") is Missing");
+//						System.out.println("#Referenced input on TransactionDto(" + t + ") is Missing");
 //						return false;
 //					}
 //
 //					if(input.UTXO.value != tempOutput.value) {
-//						System.out.println("#Referenced input Transaction(" + t + ") value is Invalid");
+//						System.out.println("#Referenced input TransactionDto(" + t + ") value is Invalid");
 //						return false;
 //					}
 //
@@ -129,11 +129,11 @@ public class NoobChain {
 //				}
 //
 //				if( currentTransaction.outputs.get(0).reciepient != currentTransaction.reciepient) {
-//					System.out.println("#Transaction(" + t + ") output reciepient is not who it should be");
+//					System.out.println("#TransactionDto(" + t + ") output reciepient is not who it should be");
 //					return false;
 //				}
 //				if( currentTransaction.outputs.get(1).reciepient != currentTransaction.sender) {
-//					System.out.println("#Transaction(" + t + ") output 'change' is not sender.");
+//					System.out.println("#TransactionDto(" + t + ") output 'change' is not sender.");
 //					return false;
 //				}
 
@@ -165,7 +165,7 @@ public class NoobChain {
 		
 		createGenesis();
 		
-		//Transaction transaction = new Transaction(walletA.publicKey, walletB.publicKey, 5);
+		//TransactionDto transaction = new TransactionDto(walletA.publicKey, walletB.publicKey, 5);
 		//transaction.signature = transaction.generateSignature(walletA.privateKey);
 		
 		//System.out.println("Is signature verified:");
@@ -175,4 +175,4 @@ public class NoobChain {
  */
 
 //System.out.println("Trying to Mine block 1... ");
-//addBlock(new Block("Hi im the first block", "0"));
+//addBlock(new BlockDto("Hi im the first block", "0"));

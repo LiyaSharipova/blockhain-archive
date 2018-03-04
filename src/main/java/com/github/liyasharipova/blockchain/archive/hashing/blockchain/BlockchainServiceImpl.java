@@ -1,7 +1,7 @@
 package com.github.liyasharipova.blockchain.archive.hashing.blockchain;
 
 import com.github.liyasharipova.blockchain.archive.blockchain_old.NoobChain;
-import com.github.liyasharipova.blockchain.archive.hashing.block.Block;
+import com.github.liyasharipova.blockchain.archive.hashing.block.BlockDto;
 import com.github.liyasharipova.blockchain.archive.hashing.exception.ChainValidityException;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +16,13 @@ public class BlockchainServiceImpl implements BlockchainService {
 
     private final int DIFFICULTY = 3;
 
-    private List<Block> blockchain = new ArrayList<>();
+    private List<BlockDto> blockchain = new ArrayList<>();
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<Block> getBlockChain() {
+    public List<BlockDto> getBlockChain() {
         return blockchain;
     }
 
@@ -30,15 +30,15 @@ public class BlockchainServiceImpl implements BlockchainService {
      * {@inheritDoc}
      */
     @Override
-    public void addBlock(Block block) {
+    public void addBlock(BlockDto block) {
         checkChainValidity();
         block.mineBlock(DIFFICULTY);
         blockchain.add(block);
     }
 
     private void checkChainValidity() {
-        Block currentBlock;
-        Block previousBlock;
+        BlockDto currentBlock;
+        BlockDto previousBlock;
         String hashTarget = new String(new char[NoobChain.difficulty]).replace('\0', '0');
         //loop through blockchain to check hashes:
         for(int i=1; i < blockchain.size(); i++) {

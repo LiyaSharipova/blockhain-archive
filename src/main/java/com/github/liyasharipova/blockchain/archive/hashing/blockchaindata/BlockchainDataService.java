@@ -1,4 +1,4 @@
-package com.github.liyasharipova.blockchain.archive.hashing.service;
+package com.github.liyasharipova.blockchain.archive.hashing.blockchaindata;
 
 /**
  * Сервис для работы с данными в блокчейне

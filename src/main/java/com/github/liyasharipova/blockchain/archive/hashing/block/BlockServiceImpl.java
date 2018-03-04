@@ -1,7 +1,7 @@
 package com.github.liyasharipova.blockchain.archive.hashing.block;
 
 import com.github.liyasharipova.blockchain.archive.hashing.blockchain.BlockchainService;
-import com.github.liyasharipova.blockchain.archive.hashing.transaction.Transaction;
+import com.github.liyasharipova.blockchain.archive.hashing.transaction.TransactionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Сервис для работы с блоком {@link Block}
+ * Сервис для работы с блоком {@link BlockDto}
  */
 @Service
 public class BlockServiceImpl implements BlockService {
@@ -24,7 +24,7 @@ public class BlockServiceImpl implements BlockService {
     /**
      * Если блокчейн пустой в самом начале работы приложения
      */
-    private Block currentBlock = new Block(BlockchainService.EMPTY_PREVIOUS_HASH);
+    private BlockDto currentBlock = new BlockDto(BlockchainService.EMPTY_PREVIOUS_HASH);
 
     /** Сервис для работы с блокчейном */
     @Autowired
@@ -34,7 +34,7 @@ public class BlockServiceImpl implements BlockService {
      * {@inheritDoc}
      */
     @Override
-    public void addTransaction(Transaction transaction) {
+    public void addTransaction(TransactionDto transaction) {
 
         if (!currentBlock.getTransactions().isEmpty()) {
             addToBlockchainIfNeeded();
@@ -50,7 +50,7 @@ public class BlockServiceImpl implements BlockService {
      * текущий блок для дальнейшего добавления транзакций в уже новый текущий блок.
      */
     private void addToBlockchainIfNeeded() {
-        ArrayList<Transaction> currentTransactions = currentBlock.getTransactions();
+        ArrayList<TransactionDto> currentTransactions = currentBlock.getTransactions();
         int currentTransactionsSize = currentTransactions.size();
         long currentTime = new Date().getTime();
         long lastTransactionTime = currentTransactions.get(currentTransactionsSize - 1).getUploadDateTime();
@@ -60,7 +60,7 @@ public class BlockServiceImpl implements BlockService {
                 || (currentTime - lastTransactionTime) > tenMinutesInSec) {
 
             blockchainService.addBlock(currentBlock);
-            currentBlock = new Block(blockchainService.getLastBlockHash());
+            currentBlock = new BlockDto(blockchainService.getLastBlockHash());
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.github.liyasharipova.blockchain.archive.hashing.util;
 
-import com.github.liyasharipova.blockchain.archive.hashing.transaction.Transaction;
+import com.github.liyasharipova.blockchain.archive.hashing.transaction.TransactionDto;
 import com.google.gson.GsonBuilder;
 
 import java.security.Key;
@@ -77,12 +77,12 @@ public class StringUtil {
         return Base64.getEncoder().encodeToString(key.getEncoded());
     }
 
-    public static String getMerkleRoot(ArrayList<Transaction> transactions) {
+    public static String getMerkleRoot(ArrayList<TransactionDto> transactions) {
         int count = transactions.size();
 
 //      собираем все хеши транзакций в список previousTreeLayer
         ArrayList<String> previousTreeLayer = new ArrayList<String>();
-        for (Transaction transaction : transactions) {
+        for (TransactionDto transaction : transactions) {
             previousTreeLayer.add(transaction.getHash());
         }
         ArrayList<String> treeLayer = previousTreeLayer;
