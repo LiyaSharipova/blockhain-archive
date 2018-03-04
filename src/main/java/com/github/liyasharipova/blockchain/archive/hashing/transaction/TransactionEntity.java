@@ -1,22 +1,24 @@
 package com.github.liyasharipova.blockchain.archive.hashing.transaction;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Objects;
 
 @Entity
 @Table(name = "transaction", schema = "blockchain_archive", catalog = "postgres")
 public class TransactionEntity {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String fileHash;
     private String blockHash;
     private String userId;
-    private Timestamp trTime;
+    private long createTime;
     private String fileName;
     private byte[] fileData;
 
-    @Id
-    @Column(name = "id")
     public Long getId() {
         return id;
     }
@@ -56,13 +58,13 @@ public class TransactionEntity {
     }
 
     @Basic
-    @Column(name = "tr_time")
-    public Timestamp getTrTime() {
-        return trTime;
+    @Column(name = "create_time")
+    public long getCreateTime() {
+        return createTime;
     }
 
-    public void setTrTime(Timestamp trTime) {
-        this.trTime = trTime;
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
     }
 
     @Basic
@@ -87,30 +89,26 @@ public class TransactionEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         TransactionEntity that = (TransactionEntity) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (fileHash != null ? !fileHash.equals(that.fileHash) : that.fileHash != null) return false;
-        if (blockHash != null ? !blockHash.equals(that.blockHash) : that.blockHash != null) return false;
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
-        if (trTime != null ? !trTime.equals(that.trTime) : that.trTime != null) return false;
-        if (fileName != null ? !fileName.equals(that.fileName) : that.fileName != null) return false;
-        if (!Arrays.equals(fileData, that.fileData)) return false;
-
-        return true;
+        return createTime == that.createTime &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(fileHash, that.fileHash) &&
+                Objects.equals(blockHash, that.blockHash) &&
+                Objects.equals(userId, that.userId) &&
+                Objects.equals(fileName, that.fileName) &&
+                Arrays.equals(fileData, that.fileData);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (fileHash != null ? fileHash.hashCode() : 0);
-        result = 31 * result + (blockHash != null ? blockHash.hashCode() : 0);
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + (trTime != null ? trTime.hashCode() : 0);
-        result = 31 * result + (fileName != null ? fileName.hashCode() : 0);
+
+        int result = Objects.hash(id, fileHash, blockHash, userId, createTime, fileName);
         result = 31 * result + Arrays.hashCode(fileData);
         return result;
     }

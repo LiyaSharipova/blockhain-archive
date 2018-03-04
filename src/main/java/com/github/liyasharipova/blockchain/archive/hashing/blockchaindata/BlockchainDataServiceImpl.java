@@ -21,6 +21,5 @@ public class BlockchainDataServiceImpl implements BlockchainDataService {
 
         blockService.addTransaction(transaction);
 
-        
     }
 }

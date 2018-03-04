@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class BlockServiceImpl implements BlockService {
 
     /** Максимальное количество транзакций в блокчейне */
-    private static final int MAXIMUM_TRANSACTOINS_PER_BLOCK = 42;
+    private static final int MAXIMUM_TRANSACTIONS_PER_BLOCK = 42;
 
     /** Максимальное время паузы между добавлением транзакций в блок */
     private static final int MAXIMUM_TIMEOUT_OF_LAST_TRANSACTION = 10;
@@ -44,7 +44,7 @@ public class BlockServiceImpl implements BlockService {
     }
 
     /**
-     * Проверяем, нужно ли закрыть блок в случае либо его переполнения (MAXIMUM_TRANSACTOINS_PER_BLOCK),
+     * Проверяем, нужно ли закрыть блок в случае либо его переполнения (MAXIMUM_TRANSACTIONS_PER_BLOCK),
      * либо в случае большой временной паузы (MAXIMUM_TIMEOUT_OF_LAST_TRANSACTION).
      * Если нужно закрыть блок, то сначала добавляем его в блокчейн, а потом создаем заново
      * текущий блок для дальнейшего добавления транзакций в уже новый текущий блок.
@@ -56,7 +56,7 @@ public class BlockServiceImpl implements BlockService {
         long lastTransactionTime = currentTransactions.get(currentTransactionsSize - 1).getUploadDateTime();
         long tenMinutesInSec = TimeUnit.MINUTES
                 .toSeconds(MAXIMUM_TIMEOUT_OF_LAST_TRANSACTION);
-        if (currentTransactionsSize >= MAXIMUM_TRANSACTOINS_PER_BLOCK
+        if (currentTransactionsSize >= MAXIMUM_TRANSACTIONS_PER_BLOCK
                 || (currentTime - lastTransactionTime) > tenMinutesInSec) {
 
             blockchainService.addBlock(currentBlock);

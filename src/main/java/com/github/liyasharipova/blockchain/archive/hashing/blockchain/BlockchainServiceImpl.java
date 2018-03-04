@@ -2,7 +2,12 @@ package com.github.liyasharipova.blockchain.archive.hashing.blockchain;
 
 import com.github.liyasharipova.blockchain.archive.blockchain_old.NoobChain;
 import com.github.liyasharipova.blockchain.archive.hashing.block.BlockDto;
+import com.github.liyasharipova.blockchain.archive.hashing.block.BlockEntity;
+import com.github.liyasharipova.blockchain.archive.hashing.block.BlockRepository;
 import com.github.liyasharipova.blockchain.archive.hashing.exception.ChainValidityException;
+import com.github.liyasharipova.blockchain.archive.hashing.transaction.TransactionEntity;
+import com.github.liyasharipova.blockchain.archive.hashing.transaction.TransactionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,12 +17,18 @@ import java.util.List;
  * {@inheritDoc}
  */
 @Service
+//@Transactional
 public class BlockchainServiceImpl implements BlockchainService {
 
     private final int DIFFICULTY = 3;
 
     private List<BlockDto> blockchain = new ArrayList<>();
 
+    @Autowired
+    private BlockRepository blockRepository;
+
+    @Autowired
+    private TransactionRepository transactionRepository;
     /**
      * {@inheritDoc}
      */
@@ -34,6 +45,21 @@ public class BlockchainServiceImpl implements BlockchainService {
         checkChainValidity();
         block.mineBlock(DIFFICULTY);
         blockchain.add(block);
+
+        BlockEntity blockEntity = new BlockEntity();
+        blockEntity.setHash(block.getHash());
+        blockEntity.setPreviousHash(block.getPreviousHash());
+        blockRepository.save(blockEntity);
+
+        block.getTransactions().forEach(transactionDto -> {
+            TransactionEntity transactionEntity = new TransactionEntity();
+            transactionEntity.setFileHash(transactionDto.getHash());
+            transactionEntity.setUserId(transactionDto.getUserId());
+            transactionEntity.setCreateTime(transactionDto.getUploadDateTime());
+            transactionEntity.setBlockHash(blockEntity.getHash());
+            transactionEntity.setFileData(transactionDto.getData());
+            transactionRepository.save(transactionEntity);
+        });
     }
 
     private void checkChainValidity() {

@@ -4,13 +4,13 @@
 CREATE SCHEMA blockchain_archive;
 CREATE TABLE IF NOT EXISTS blockchain_archive.transaction
 (
-  id         BIGSERIAL PRIMARY KEY NOT NULL,
-  file_hash  VARCHAR               NOT NULL,
-  block_hash VARCHAR               NOT NULL,
-  user_id    VARCHAR               NOT NULL,
-  tr_time    TIMESTAMP             NOT NULL,
-  file_name  TEXT                  NOT NULL,
-  file_data  BYTEA                 NOT NULL
+  id          BIGSERIAL PRIMARY KEY NOT NULL,
+  file_hash   VARCHAR               NOT NULL,
+  block_hash  VARCHAR               NOT NULL,
+  user_id     VARCHAR               NOT NULL,
+  create_time bigint                not null,
+  file_name   TEXT                  NOT NULL,
+  file_data   BYTEA                 NOT NULL
 );
 
 CREATE INDEX IF NOT EXISTS transaction__file_name__ix
