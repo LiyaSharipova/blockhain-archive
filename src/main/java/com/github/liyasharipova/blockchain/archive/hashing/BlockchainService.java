@@ -3,15 +3,19 @@ package com.github.liyasharipova.blockchain.archive.hashing;
 import java.util.List;
 
 /**
- *
+ * Сервис для работы с блокчейн
  */
 public interface BlockchainService {
 
-    String EMPTY_HASH = "0";
+    /** Хэш  предыдущего блока {@link Block#previousHash} для первого блока в блокчейне */
+    String EMPTY_PREVIOUS_HASH = "0";
 
+    /** Получить связку блокчейн */
     List<Block> getBlockChain();
 
+    /** Добавить блок в блокчейн */
     void addBlock(Block block);
 
+    /** Получить хэш последнего блока*/
     String getLastBlockHash();
 }

@@ -22,12 +22,15 @@ public class BlockServiceImpl implements BlockService {
     /**
      * Если блокчейн пустой в самом начале работы приложения
      */
-    private Block currentBlock = new Block(BlockchainService.EMPTY_HASH);
+    private Block currentBlock = new Block(BlockchainService.EMPTY_PREVIOUS_HASH);
 
     /** Сервис для работы с блокчейном */
     @Autowired
     private BlockchainService blockchainService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addTransaction(Transaction transaction) {
         ArrayList<Transaction> currentTransactions = currentBlock.getTransactions();
