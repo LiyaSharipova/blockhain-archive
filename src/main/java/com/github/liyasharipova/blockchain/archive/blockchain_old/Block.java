@@ -23,7 +23,7 @@ public class Block {
 	
 	//Вычисляем новый хэш на основе содержимого блока
 	public String calculateHash() {
-		String calculatedhash = StringUtil.applySha256( 
+		String calculatedhash = StringUtil.applySha256(
 				previousHash +
 				Long.toString(timeStamp) +
 				Integer.toString(nonce) + 

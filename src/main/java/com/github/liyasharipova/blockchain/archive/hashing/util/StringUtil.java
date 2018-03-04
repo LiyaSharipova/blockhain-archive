@@ -11,13 +11,16 @@ import java.security.Signature;
 import java.util.ArrayList;
 import java.util.Base64;
 
+
 public class StringUtil {
 
+    private static final String STRIBOG_512_NAME = "Stribog256";
+
     //Applies Sha256 to a string and returns the result.
-    public static String applySha256(String input) {
+    public static String applyStribog(String input) {
 
         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            MessageDigest digest = MessageDigest.getInstance(STRIBOG_512_NAME);
 
             //Applies sha256 to our input,
             byte[] hash = digest.digest(input.getBytes("UTF-8"));
@@ -90,7 +93,7 @@ public class StringUtil {
         while (count > 1) {
             treeLayer = new ArrayList<String>();
             for (int i = 1; i < previousTreeLayer.size(); i++) {
-                treeLayer.add(applySha256(previousTreeLayer.get(i - 1) + previousTreeLayer.get(i)));
+                treeLayer.add(applyStribog(previousTreeLayer.get(i - 1) + previousTreeLayer.get(i)));
             }
             count = treeLayer.size();
             previousTreeLayer = treeLayer;
