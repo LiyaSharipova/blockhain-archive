@@ -1,4 +1,4 @@
-package com.github.liyasharipova.blockchain.archive.hashing;
+package com.github.liyasharipova.blockchain.archive.hashing.transaction;
 
 import com.github.liyasharipova.blockchain.archive.blockchain.StringUtil;
 import lombok.Data;

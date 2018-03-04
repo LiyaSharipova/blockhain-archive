@@ -10,7 +10,6 @@ public interface BlockchainDataService {
      * @param fileData данные файла
      * @param userId идентификатор пользователя
      * @param uploadDateTime время загрузки файла
-     * @return boolean Успешно ли файл поместился в блокчейн. Влияет на дальнейшую
      */
     void placeToBlockchain(byte[] fileData, String userId, long uploadDateTime);
 }

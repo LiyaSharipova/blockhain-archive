@@ -1,7 +1,7 @@
 package com.github.liyasharipova.blockchain.archive.hashing.service;
 
-import com.github.liyasharipova.blockchain.archive.hashing.BlockService;
-import com.github.liyasharipova.blockchain.archive.hashing.Transaction;
+import com.github.liyasharipova.blockchain.archive.hashing.block.BlockService;
+import com.github.liyasharipova.blockchain.archive.hashing.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +20,7 @@ public class BlockchainDataServiceImpl implements BlockchainDataService {
         Transaction transaction = new Transaction(fileData, userId, uploadDateTime);
 
         blockService.addTransaction(transaction);
+
+        
     }
 }

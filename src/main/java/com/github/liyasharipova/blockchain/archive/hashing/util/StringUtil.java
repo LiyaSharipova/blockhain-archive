@@ -1,5 +1,6 @@
-package com.github.liyasharipova.blockchain.archive.hashing;
+package com.github.liyasharipova.blockchain.archive.hashing.util;
 
+import com.github.liyasharipova.blockchain.archive.hashing.transaction.Transaction;
 import com.google.gson.GsonBuilder;
 
 import java.security.Key;

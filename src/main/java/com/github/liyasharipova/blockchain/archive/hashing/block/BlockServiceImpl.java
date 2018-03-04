@@ -1,5 +1,7 @@
-package com.github.liyasharipova.blockchain.archive.hashing;
+package com.github.liyasharipova.blockchain.archive.hashing.block;
 
+import com.github.liyasharipova.blockchain.archive.hashing.blockchain.BlockchainService;
+import com.github.liyasharipova.blockchain.archive.hashing.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,9 +36,9 @@ public class BlockServiceImpl implements BlockService {
     @Override
     public void addTransaction(Transaction transaction) {
 
-        ArrayList<Transaction> currentTransactions = currentBlock.getTransactions();
-
-        addToBlockchainIfNeeded(currentTransactions);
+        if (!currentBlock.getTransactions().isEmpty()) {
+            addToBlockchainIfNeeded();
+        }
 
         currentBlock.addTransaction(transaction);
     }
@@ -46,16 +48,15 @@ public class BlockServiceImpl implements BlockService {
      * либо в случае большой временной паузы (MAXIMUM_TIMEOUT_OF_LAST_TRANSACTION).
      * Если нужно закрыть блок, то сначала добавляем его в блокчейн, а потом создаем заново
      * текущий блок для дальнейшего добавления транзакций в уже новый текущий блок.
-     *
-     * @param currentTransactions транзакции из текущего блока
      */
-    private void addToBlockchainIfNeeded(ArrayList<Transaction> currentTransactions) {
-        int currTrSize = currentTransactions.size();
+    private void addToBlockchainIfNeeded() {
+        ArrayList<Transaction> currentTransactions = currentBlock.getTransactions();
+        int currentTransactionsSize = currentTransactions.size();
         long currentTime = new Date().getTime();
-        long lastTransactionTime = currentTransactions.get(currTrSize - 1).getUploadDateTime();
+        long lastTransactionTime = currentTransactions.get(currentTransactionsSize - 1).getUploadDateTime();
         long tenMinutesInSec = TimeUnit.MINUTES
                 .toSeconds(MAXIMUM_TIMEOUT_OF_LAST_TRANSACTION);
-        if (currTrSize >= MAXIMUM_TRANSACTOINS_PER_BLOCK
+        if (currentTransactionsSize >= MAXIMUM_TRANSACTOINS_PER_BLOCK
                 || (currentTime - lastTransactionTime) > tenMinutesInSec) {
 
             blockchainService.addBlock(currentBlock);

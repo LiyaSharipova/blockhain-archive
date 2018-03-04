@@ -1,4 +1,6 @@
-package com.github.liyasharipova.blockchain.archive.hashing;
+package com.github.liyasharipova.blockchain.archive.hashing.blockchain;
+
+import com.github.liyasharipova.blockchain.archive.hashing.block.Block;
 
 import java.util.List;
 
