@@ -33,22 +33,23 @@ public class BlockServiceImpl implements BlockService {
      */
     @Override
     public void addTransaction(Transaction transaction) {
+
         ArrayList<Transaction> currentTransactions = currentBlock.getTransactions();
 
-        checkAndAddToBlockchain(currentTransactions);
+        addToBlockchainIfNeeded(currentTransactions);
 
         currentBlock.addTransaction(transaction);
     }
 
     /**
-     * Проверяем, нужно ли закрыть блок в случае либо его переполнения MAXIMUM_TRANSACTOINS_PER_BLOCK,
+     * Проверяем, нужно ли закрыть блок в случае либо его переполнения (MAXIMUM_TRANSACTOINS_PER_BLOCK),
      * либо в случае большой временной паузы (MAXIMUM_TIMEOUT_OF_LAST_TRANSACTION).
      * Если нужно закрыть блок, то сначала добавляем его в блокчейн, а потом создаем заново
-     * текущий блок
+     * текущий блок для дальнейшего добавления транзакций в уже новый текущий блок.
      *
      * @param currentTransactions транзакции из текущего блока
      */
-    private void checkAndAddToBlockchain(ArrayList<Transaction> currentTransactions) {
+    private void addToBlockchainIfNeeded(ArrayList<Transaction> currentTransactions) {
         int currTrSize = currentTransactions.size();
         long currentTime = new Date().getTime();
         long lastTransactionTime = currentTransactions.get(currTrSize - 1).getUploadDateTime();
