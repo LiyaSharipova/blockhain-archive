@@ -2,12 +2,16 @@ package com.github.liyasharipova.blockchain.archive.hashing.block;
 
 import com.github.liyasharipova.blockchain.archive.hashing.blockchain.BlockchainService;
 import com.github.liyasharipova.blockchain.archive.hashing.transaction.TransactionDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
 
 /**
  * Сервис для работы с блоком {@link BlockDto}
@@ -15,11 +19,15 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class BlockServiceImpl implements BlockService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(BlockDto.class);
+
     /** Максимальное количество транзакций в блокчейне */
-    private static final int MAXIMUM_TRANSACTIONS_PER_BLOCK = 42;
+    @Value("${maximum.transactions.per.block}")
+    private static int MAXIMUM_TRANSACTIONS_PER_BLOCK;
 
     /** Максимальное время паузы между добавлением транзакций в блок */
-    private static final int MAXIMUM_TIMEOUT_OF_LAST_TRANSACTION = 10;
+    @Value("${maximum.timeout.of.last.transaction.sec}")
+    private static int MAXIMUM_TIMEOUT_OF_LAST_TRANSACTION_SEC;
 
     /**
      * Если блокчейн пустой в самом начале работы приложения
@@ -41,6 +49,8 @@ public class BlockServiceImpl implements BlockService {
         }
 
         currentBlock.addTransaction(transaction);
+        LOGGER.info("Added new transaction in current block with hash {} ",
+                    transaction.getHash().substring(0, 6));
     }
 
     /**
@@ -54,13 +64,16 @@ public class BlockServiceImpl implements BlockService {
         int currentTransactionsSize = currentTransactions.size();
         long currentTime = new Date().getTime();
         long lastTransactionTime = currentTransactions.get(currentTransactionsSize - 1).getUploadDateTime();
-        long tenMinutesInSec = TimeUnit.MINUTES
-                .toSeconds(MAXIMUM_TIMEOUT_OF_LAST_TRANSACTION);
+        long tenMinutesInSec = TimeUnit.SECONDS
+                .toMillis(MAXIMUM_TIMEOUT_OF_LAST_TRANSACTION_SEC);
         if (currentTransactionsSize >= MAXIMUM_TRANSACTIONS_PER_BLOCK
                 || (currentTime - lastTransactionTime) > tenMinutesInSec) {
 
             blockchainService.addBlock(currentBlock);
-            currentBlock = new BlockDto(blockchainService.getLastBlockHash());
+            String lastBlockHash = blockchainService.getLastBlockHash();
+            currentBlock = new BlockDto(lastBlockHash);
+            LOGGER.info("Current block re-initialized for new transactions with previous hash {}",
+                        lastBlockHash.substring(0, 6));
         }
     }
 }

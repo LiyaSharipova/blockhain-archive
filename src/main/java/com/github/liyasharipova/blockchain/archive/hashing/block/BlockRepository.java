@@ -1,8 +1,8 @@
 package com.github.liyasharipova.blockchain.archive.hashing.block;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BlockRepository extends CrudRepository<BlockEntity, String>{
+public interface BlockRepository extends JpaRepository<BlockEntity, String> {
 }

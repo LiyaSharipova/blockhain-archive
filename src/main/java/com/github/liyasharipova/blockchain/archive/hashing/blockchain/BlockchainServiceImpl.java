@@ -7,11 +7,15 @@ import com.github.liyasharipova.blockchain.archive.hashing.block.BlockRepository
 import com.github.liyasharipova.blockchain.archive.hashing.exception.ChainValidityException;
 import com.github.liyasharipova.blockchain.archive.hashing.transaction.TransactionEntity;
 import com.github.liyasharipova.blockchain.archive.hashing.transaction.TransactionRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * {@inheritDoc}
@@ -20,7 +24,10 @@ import java.util.List;
 //@Transactional
 public class BlockchainServiceImpl implements BlockchainService {
 
-    private final int DIFFICULTY = 3;
+    private static final Logger LOGGER = LoggerFactory.getLogger(BlockchainServiceImpl.class);
+
+    @Value("${difficulty}")
+    private int DIFFICULTY;
 
     private List<BlockDto> blockchain = new ArrayList<>();
 
@@ -60,6 +67,10 @@ public class BlockchainServiceImpl implements BlockchainService {
             transactionEntity.setFileData(transactionDto.getData());
             transactionRepository.save(transactionEntity);
         });
+
+        LOGGER.info("{} saved with hash: {}",
+                    BlockEntity.class.getSimpleName(),
+                    blockEntity.getHash().substring(0, 6));
     }
 
     private void checkChainValidity() {
@@ -73,20 +84,19 @@ public class BlockchainServiceImpl implements BlockchainService {
             previousBlock = blockchain.get(i-1);
             //compare registered hash and calculated hash:
             if (!currentBlock.getHash().equals(currentBlock.calculateHash())) {
-                throw new ChainValidityException("#Current Hashes not equal");
+                throw new ChainValidityException("Current Hashes not equal");
             }
             //compare previous hash and registered previous hash
             if (!previousBlock.getHash().equals(currentBlock.getHash())) {
-                throw new ChainValidityException("#Previous Hashes not equal");
+                throw new ChainValidityException("Previous Hashes not equal");
             }
             //check if hash is solved
             if (!currentBlock.getHash().substring(0, NoobChain.difficulty).equals(hashTarget)) {
-                throw new ChainValidityException("#This block hasn't been mined");
+                throw new ChainValidityException("This block hasn't been mined");
             }
 
         }
-        System.out.println("Blockchain is valid");
-
+        LOGGER.info("Blockchain with size {} is valid", blockchain.size());
     }
 
     /**

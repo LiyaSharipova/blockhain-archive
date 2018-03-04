@@ -18,6 +18,7 @@ CREATE INDEX IF NOT EXISTS transaction__file_name__ix
 COMMENT ON COLUMN blockchain_archive.transaction.file_name IS 'Название файла';
 COMMENT ON COLUMN blockchain_archive.transaction.file_data IS 'Данные файла в байтовом представлении';
 COMMENT ON COLUMN blockchain_archive.transaction.file_hash IS 'Хэш файла';
+comment on column blockchain_archive.transaction.create_time is 'Время загрузки файла в мсек после January 1, 1970, 00:00:00 GMT';
 COMMENT ON TABLE blockchain_archive.transaction IS 'Транзакции загруженных файлов';
 
 

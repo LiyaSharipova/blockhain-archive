@@ -1,14 +1,19 @@
 package com.github.liyasharipova.blockchain.archive.hashing.block;
 
-import com.github.liyasharipova.blockchain.archive.hashing.util.StringUtil;
 import com.github.liyasharipova.blockchain.archive.hashing.transaction.TransactionDto;
+import com.github.liyasharipova.blockchain.archive.hashing.util.StringUtil;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Date;
 
+
 @Data
 public class BlockDto {
+
+    private static final Logger logger = LoggerFactory.getLogger(BlockDto.class);
 
     /**
      * Хэш блока, вычисляюющий на основе хэша пред. блока, merkleRoot (хэш на основе всех транзакций),
@@ -61,7 +66,7 @@ public class BlockDto {
             nonce++;
             hash = calculateHash();
         }
-        System.out.println("BlockDto Mined!!! : " + hash);
+        logger.info("Block mined with hash {} ", hash.substring(0, 6));
     }
 
     /**
@@ -74,7 +79,6 @@ public class BlockDto {
         }
 
         transactions.add(transaction);
-        System.out.println("TransactionDto Successfully added to BlockDto");
         return true;
     }
 
