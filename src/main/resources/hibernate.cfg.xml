@@ -7,7 +7,7 @@
         <property name="connection.url">jdbc:postgresql://localhost:5432/blockhain_archive</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
-        <mapping class="com.github.liyasharipova.blockchain.archive.file_tofix.entity.FileEntity"/>
+        <mapping class="com.github.liyasharipova.blockchain.archive.file_upload.entity.FileEntity"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

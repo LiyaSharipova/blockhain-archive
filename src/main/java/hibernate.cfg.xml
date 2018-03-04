@@ -6,8 +6,8 @@
     <session-factory>
         <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <mapping class="com.github.liyasharipova.blockchain.archive.hashing.transaction.TransactionEntity"/>
-        <mapping class="com.github.liyasharipova.blockchain.archive.hashing.block.BlockEntity"/>
+        <mapping class="com.github.liyasharipova.blockchain.archive.blochain_realisation.transaction.TransactionEntity"/>
+        <mapping class="com.github.liyasharipova.blockchain.archive.blochain_realisation.block.BlockEntity"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 
